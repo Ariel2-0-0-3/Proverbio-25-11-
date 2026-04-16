@@ -1,0 +1,160 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manzanas de Oro - Sabiduría Cotidiana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            color: #e2e2e2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .gold-text {
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .apple-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #f1d592 100%);
+            color: #1e293b;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .apple-btn:hover {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .apple-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .status-badge {
+            background: rgba(192, 192, 192, 0.1);
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            color: #c0c0c0;
+        }
+    </style>
+</head>
+<body class="p-4">
+
+    <div class="w-full max-w-lg">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl gold-text mb-3">Manzanas de Oro</h1>
+            <div class="inline-block px-4 py-1 rounded-full status-badge text-[10px] tracking-[0.2em] font-bold">
+                PROVERBIO 25:11
+            </div>
+        </header>
+
+        <main class="card rounded-[2.5rem] p-8 md:p-12 text-center relative">
+            <div id="icon-display" class="text-6xl mb-8 transition-transform duration-500">🍎</div>
+
+            <div id="content-box" class="min-h-[240px] flex flex-col justify-center">
+                <h2 id="scenario-title" class="text-xl font-bold mb-4 text-blue-300">¿Qué harías tú?</h2>
+                <p id="scenario-desc" class="text-gray-300 mb-8 leading-relaxed">
+                    Presiona el botón para descubrir una situación cotidiana y aprender el valor de la palabra oportuna.
+                </p>
+                
+                <div id="advice-result" class="hidden p-5 bg-white/5 border-l-4 border-yellow-500 rounded-r-xl text-left mb-8 italic text-sm md:text-base">
+                </div>
+            </div>
+
+            <button onclick="nuevaCapsula()" class="apple-btn w-full py-5 rounded-2xl shadow-xl">
+                Lanzar Nueva Cápsula
+            </button>
+        </main>
+
+        <footer class="mt-8 text-center text-gray-500 text-[10px] tracking-widest uppercase">
+            Diseñado para la reflexión diaria • Radio Live
+        </footer>
+    </div>
+
+    <script>
+        const situaciones = [
+            {
+                t: "El Amigo Apurado",
+                d: "Ves a un amigo que está saliendo tarde para el trabajo y está muy estresado buscando sus llaves.",
+                a: "No es momento de darle un consejo sobre la organización. La 'manzana de oro' es ayudarlo a buscar en silencio. Tu ayuda práctica es el marco de plata que dirá más que mil palabras."
+            },
+            {
+                t: "Cansancio al llegar a Casa",
+                d: "Tu pareja o familiar llega muy cansado después de un día difícil y empieza a quejarse de su jefe.",
+                a: "Aguarda. El Proverbio habla de oportunidad. Escuchar con atención es tu 'plata'. El consejo puede esperar a mañana cuando el descanso haya pulido el oído de quien te escucha."
+            },
+            {
+                t: "Un error en la mesa",
+                d: "En una comida, alguien cuenta una historia y se equivoca en un dato sin importancia.",
+                a: "La 'plata' aquí es la discreción. No corregir en público es una joya de oro. Guardar la corrección para proteger la dignidad del otro es hablar oportunamente."
+            },
+            {
+                t: "Deseo de ayudar",
+                d: "Ves a un compañero nuevo en el trabajo haciendo algo de forma muy lenta y crees que sabes cómo hacerlo más rápido.",
+                a: "Pregunta primero: '¿Te gustaría un truco que me sirvió a mí?'. Pedir permiso es el marco de plata que hace que tu consejo (oro) sea bienvenido y no se sienta como una crítica."
+            },
+            {
+                t: "El silencio necesario",
+                d: "Alguien te cuenta un problema muy personal y se queda callado esperando una reacción.",
+                a: "Si no tienes una solución clara, un 'te entiendo y aquí estoy' es oro puro. No llenar el espacio con palabras vacías es el arte de la orfebrería de la comunicación."
+            },
+            {
+                t: "Repetir lo mismo",
+                d: "Alguien te cuenta por tercera vez el mismo problema cotidiano que no termina de resolver.",
+                a: "Ten paciencia. La palabra oportuna a veces es un recordatorio suave de sus fortalezas pasadas. La paciencia es la plata que sostiene el valor de tu amistad."
+            }
+        ];
+
+        function nuevaCapsula() {
+            const container = document.getElementById('content-box');
+            const titulo = document.getElementById('scenario-title');
+            const desc = document.getElementById('scenario-desc');
+            const advice = document.getElementById('advice-result');
+            const icon = document.getElementById('icon-display');
+
+            container.classList.remove('fade-in');
+            void container.offsetWidth;
+            container.classList.add('fade-in');
+            icon.style.transform = 'rotate(20deg) scale(1.1)';
+            setTimeout(() => icon.style.transform = 'rotate(0deg) scale(1)', 200);
+
+            const item = situaciones[Math.floor(Math.random() * situaciones.length)];
+
+            titulo.innerText = item.t;
+            desc.innerText = item.d;
+            advice.innerHTML = `<span class="text-yellow-500 font-bold block mb-1">REFLEXIÓN:</span> ${item.a}`;
+            advice.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+
+```
