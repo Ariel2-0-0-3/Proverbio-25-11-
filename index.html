@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manzanas de Oro - Sabiduría Cotidiana</title>
+    <title>Manzanas de Oro - Reflexión Interactiva</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
@@ -41,13 +41,16 @@
             transition: all 0.3s ease;
         }
 
-        .apple-btn:hover {
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transform: translateY(-2px);
+        .reveal-btn {
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            background: transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .apple-btn:active {
-            transform: translateY(0) scale(0.98);
+        .reveal-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
         }
 
         .fade-in {
@@ -79,18 +82,25 @@
         <main class="card rounded-[2.5rem] p-8 md:p-12 text-center relative">
             <div id="icon-display" class="text-6xl mb-8 transition-transform duration-500">🍎</div>
 
-            <div id="content-box" class="min-h-[240px] flex flex-col justify-center">
+            <div id="content-box" class="min-h-[260px] flex flex-col justify-center">
                 <h2 id="scenario-title" class="text-xl font-bold mb-4 text-blue-300">¿Qué harías tú?</h2>
                 <p id="scenario-desc" class="text-gray-300 mb-8 leading-relaxed">
-                    Presiona el botón para descubrir una situación cotidiana y aprender el valor de la palabra oportuna.
+                    Presiona el botón para descubrir una situación cotidiana y reflexiona antes de ver el consejo.
                 </p>
                 
-                <div id="advice-result" class="hidden p-5 bg-white/5 border-l-4 border-yellow-500 rounded-r-xl text-left mb-8 italic text-sm md:text-base">
+                <!-- Botón para revelar el secreto -->
+                <button id="btn-reveal" onclick="revelarConsejo()" class="hidden reveal-btn py-2 px-6 rounded-full mx-auto mb-6">
+                    ✨ Ver Reflexión de Oro
+                </button>
+
+                <!-- El consejo oculto -->
+                <div id="advice-result" class="hidden p-5 bg-white/5 border-l-4 border-yellow-500 rounded-r-xl text-left mb-8 italic text-sm md:text-base fade-in">
+                    <!-- Dinámico -->
                 </div>
             </div>
 
             <button onclick="nuevaCapsula()" class="apple-btn w-full py-5 rounded-2xl shadow-xl">
-                Lanzar Nueva Cápsula
+                Lanzar Nueva Situación
             </button>
         </main>
 
@@ -133,16 +143,22 @@
             }
         ];
 
+        let consejoActual = "";
+
         function nuevaCapsula() {
             const container = document.getElementById('content-box');
             const titulo = document.getElementById('scenario-title');
             const desc = document.getElementById('scenario-desc');
             const advice = document.getElementById('advice-result');
+            const btnReveal = document.getElementById('btn-reveal');
             const icon = document.getElementById('icon-display');
 
+            // Resetear estados
             container.classList.remove('fade-in');
             void container.offsetWidth;
             container.classList.add('fade-in');
+            advice.classList.add('hidden');
+            
             icon.style.transform = 'rotate(20deg) scale(1.1)';
             setTimeout(() => icon.style.transform = 'rotate(0deg) scale(1)', 200);
 
@@ -150,8 +166,19 @@
 
             titulo.innerText = item.t;
             desc.innerText = item.d;
-            advice.innerHTML = `<span class="text-yellow-500 font-bold block mb-1">REFLEXIÓN:</span> ${item.a}`;
+            consejoActual = item.a;
+            
+            // Mostrar botón de revelar
+            btnReveal.classList.remove('hidden');
+        }
+
+        function revelarConsejo() {
+            const advice = document.getElementById('advice-result');
+            const btnReveal = document.getElementById('btn-reveal');
+            
+            advice.innerHTML = `<span class="text-yellow-500 font-bold block mb-1">REFLEXIÓN:</span> ${consejoActual}`;
             advice.classList.remove('hidden');
+            btnReveal.classList.add('hidden'); // Ocultar el botón después de revelar
         }
     </script>
 </body>
