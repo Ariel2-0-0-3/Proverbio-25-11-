@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manzanas de Oro - Reflexión Interactiva</title>
+    <title>Manzanas de Oro - Tribu Encendida</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
@@ -20,159 +20,174 @@
             overflow-x: hidden;
         }
 
-        .gold-text {
+        /* Logo de cabecera */
+        .logo-main {
+            width: 210px;
+            margin: 0 auto 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
+            transition: transform 0.5s ease;
+        }
+        
+        .logo-main:hover {
+            transform: scale(1.05);
+        }
+
+        .gold-title {
             color: #d4af37;
             font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
         }
 
+        /* Marca de Agua con el Logo de la Tribu */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+            background-image: url('https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Botón Generar Situación en Azul Diferente */
         .apple-btn {
-            background: linear-gradient(135deg, #d4af37 0%, #f1d592 100%);
-            color: #1e293b;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
+            letter-spacing: 0.15em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .apple-btn:hover {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.4);
         }
 
         .reveal-btn {
-            border: 1px solid #d4af37;
-            color: #d4af37;
-            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
             font-weight: 600;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .reveal-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
         }
 
         .status-badge {
-            background: rgba(192, 192, 192, 0.1);
-            border: 1px solid rgba(192, 192, 192, 0.3);
-            color: #c0c0c0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #icon-display {
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+        }
+
+        /* Estilo Dorado para la Reflexión */
+        .gold-reflection {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
         }
     </style>
 </head>
 <body class="p-4">
 
     <div class="w-full max-w-lg">
-        <header class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl gold-text mb-3">Manzanas de Oro</h1>
-            <div class="inline-block px-4 py-1 rounded-full status-badge text-[10px] tracking-[0.2em] font-bold">
-                PROVERBIO 25:11
+        <header class="text-center mb-10 fade-in">
+            <!-- Logo Oficial -->
+            <img src="https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png" 
+                 alt="Tribu Encendida Logo" 
+                 class="logo-main"
+                 onerror="this.src='https://img.icons8.com/ios-filled/150/ffffff/fire-alt.png'; this.style.opacity='0.3';">
+            
+            <h1 class="gold-title">Manzanas de Oro</h1>
+            <div class="inline-block px-4 py-1 rounded-full status-badge text-[9px] tracking-[0.3em] font-bold uppercase">
+                Proverbio 25:11
             </div>
         </header>
 
-        <main class="card rounded-[2.5rem] p-8 md:p-12 text-center relative">
-            <div id="icon-display" class="text-6xl mb-8 transition-transform duration-500">🍎</div>
+        <main class="card rounded-[3rem] p-10 md:p-14 text-center">
+            <!-- Marca de agua interna -->
+            <div class="watermark"></div>
 
-            <div id="content-box" class="min-h-[260px] flex flex-col justify-center">
-                <h2 id="scenario-title" class="text-xl font-bold mb-4 text-blue-300">¿Qué harías tú?</h2>
-                <p id="scenario-desc" class="text-gray-300 mb-8 leading-relaxed">
-                    Presiona el botón para descubrir una situación cotidiana al azar y reflexiona antes de ver el consejo.
+            <div id="icon-display" class="text-7xl mb-10 transition-transform duration-700 select-none">🍎</div>
+
+            <div id="content-box" class="min-h-[240px] flex flex-col justify-center relative">
+                <h2 id="scenario-title" class="text-2xl font-bold mb-4 text-white tracking-tight">¿Qué harías tú?</h2>
+                <p id="scenario-desc" class="text-slate-400 mb-10 leading-relaxed text-lg">
+                    Haz clic en el botón azul para lanzar una nueva situación de sabiduría.
                 </p>
                 
-                <button id="btn-reveal" onclick="revelarConsejo()" class="hidden reveal-btn py-2 px-6 rounded-full mx-auto mb-6">
-                    ✨ Ver Reflexión de Oro
+                <button id="btn-reveal" onclick="revelarConsejo()" class="hidden reveal-btn py-3 px-8 rounded-2xl mx-auto mb-8 transition-all">
+                    Ver Reflexión
                 </button>
 
-                <div id="advice-result" class="hidden p-5 bg-white/5 border-l-4 border-yellow-500 rounded-r-xl text-left mb-8 italic text-sm md:text-base fade-in">
+                <!-- El contenedor de la reflexión se mantiene dorado -->
+                <div id="advice-result" class="hidden p-6 gold-reflection rounded-3xl text-left mb-10 fade-in">
                     <!-- Contenido dinámico -->
                 </div>
             </div>
 
-            <button onclick="nuevaCapsula()" class="apple-btn w-full py-5 rounded-2xl shadow-xl">
-                Lanzar Situación Aleatoria
+            <button onclick="nuevaCapsula()" class="apple-btn w-full py-5 rounded-2xl shadow-xl text-sm font-black">
+                Generar Situación
             </button>
         </main>
 
-        <footer class="mt-8 text-center text-gray-500 text-[10px] tracking-widest uppercase">
-            Sistema de Selección Aleatoria • Radio Live
+        <footer class="mt-12 text-center flex flex-col gap-2">
+            <p class="text-[10px] tracking-[0.4em] text-slate-400 uppercase font-bold">
+                Tribu Encendida &copy; 2026
+            </p>
+            <p class="text-[8px] tracking-[0.6em] text-slate-600 uppercase font-medium">
+                "Una Tribu, un Fuego"
+            </p>
         </footer>
     </div>
 
     <script>
         const situaciones = [
-            // TRABAJO Y PRODUCTIVIDAD
             { t: "Error del Colega", d: "Un compañero comete un error leve en un reporte frente al jefe.", a: "No lo corrijas en público. La plata es el silencio discreto; el oro es decírselo a solas después para que él mismo lo arregle." },
             { t: "Junta Tensa", d: "Todos están discutiendo por un problema y nadie llega a una solución.", a: "No grites más. La palabra oportuna es la que calma: propón una pausa o una pregunta que invite a pensar, no a pelear." },
-            { t: "El Compañero Lento", d: "Alguien nuevo tarda mucho en entender una tarea que tú dominas.", a: "Pedir permiso para ayudar es la clave. '¿Me dejas enseñarte un atajo?' es mejor que 'lo estás haciendo mal'." },
-            { t: "Crítica de Pasillo", d: "Un grupo de colegas empieza a hablar mal de otro compañero que no está.", a: "La manzana de oro es cambiar el tema o mencionar algo positivo de esa persona. No sumarse al ruido es sabiduría pura." },
-            { t: "Éxito Ajeno", d: "Un colega recibe un ascenso que tú también querías.", a: "Felicítalo con sinceridad. El cesto de plata es tu madurez; el oro es tu capacidad de alegrarte por otros." },
-            
-            // FAMILIA Y PAREJA
-            { t: "Cansancio Extremo", d: "Tu pareja llega a casa y se queja de todo apenas entra por la puerta.", a: "Escucha sin dar soluciones inmediatas. El marco de plata es la empatía; el oro es esperar a que cene y descanse antes de hablar." },
-            { t: "Plato Roto", d: "Un niño o familiar rompe algo valioso por accidente.", a: "Antes de regañar, pregunta si está bien. La relación vale más que el objeto. Tu calma es el oro en ese momento de susto." },
-            { t: "Consejo de Padres", d: "Tus padres te dan un consejo que sientes que ya no aplica a tu vida.", a: "Agradece la intención antes de debatir la idea. La honra es el marco de plata que permite que tu decisión sea respetada." },
-            { t: "Discusión por Tareas", d: "Nadie ha lavado los platos y todos están de mal humor.", a: "Hazlo tú sin reclamar. A veces la palabra más oportuna es la que se dice con acciones, no con quejas." },
-            { t: "Hijo Rebelde", d: "Un adolescente te contesta de mala forma.", a: "No respondas con el mismo tono. Una palabra suave rompe la ira. Espera a que la emoción baje para hablar con autoridad." },
-
-            // AMISTAD
-            { t: "Amigo en Deuda", d: "Un amigo te debe una pequeña cantidad de dinero y parece haberlo olvidado.", a: "Si no lo necesitas urgente, espera un momento privado para mencionarlo con suavidad, o perdónalo en silencio si ves que está pasando necesidad." },
-            { t: "Secreto Confiado", d: "Un amigo te cuenta algo muy personal pero te mueres por contárselo a tu pareja.", a: "La lealtad es oro. Mantener el secreto es el marco de plata que protege tu amistad de por vida." },
-            { t: "Amigo Triste", d: "Ves a un amigo desanimado pero él dice que 'no tiene nada'.", a: "No presiones. Tu presencia silenciosa es la plata; decirle 'aquí estoy cuando quieras hablar' es el oro." },
-            { t: "Diferencia Política", d: "Un amigo publica algo en redes que te parece totalmente equivocado.", a: "No discutas en los comentarios. El oro es la relación, no tener la razón en una pantalla. El silencio es prudencia." },
-            { t: "Éxito de Amigo", d: "A tu amigo le va muy bien y a ti no tanto.", a: "Evita los comentarios sarcásticos. Tu apoyo genuino es el cesto de plata que sostiene su alegría." },
-
-            // REDES SOCIALES Y TECNOLOGÍA
-            { t: "Comentario Ofensivo", d: "Alguien escribe algo grosero en una de tus fotos.", a: "No respondas al mismo nivel. El oro es tu paz mental; la plata es el botón de 'bloquear' o ignorar." },
-            { t: "Noticias Falsas", d: "Ves a alguien compartiendo información que sabes que es falsa.", a: "Mándale un mensaje privado con la fuente real. Corregir en público humilla; corregir en privado educa." },
-            { t: "Grupo de WhatsApp", d: "El grupo de la familia está lleno de mensajes que no te interesan o te molestan.", a: "No salgas con un portazo emocional. Silencia el grupo y responde solo lo necesario con amabilidad. Eso es sabiduría." },
-            { t: "Celular en la Mesa", d: "Estás cenando con alguien y esa persona no suelta el teléfono.", a: "No reclames con enojo. Guarda el tuyo primero y haz una pregunta interesante que le invite a conectar contigo." },
-            { t: "Mensaje Malinterpretado", d: "Sientes que alguien te escribió con un tono pesado por chat.", a: "No asumas lo peor. Llama por teléfono. La voz es la plata que aclara los malentendidos del texto." },
-
-            // SITUACIONES PÚBLICAS
-            { t: "Fila Larga", d: "Alguien se cuela en la fila del supermercado frente a ti.", a: "Pídelo con cortesía: 'Disculpe, creo que la fila sigue por allá'. La amabilidad es el oro que evita un conflicto innecesario." },
-            { t: "Mesero Error", d: "Te traen un plato que no pediste o está frío.", a: "Sé amable al reclamar. Esa persona puede haber tenido un día terrible. Tu paciencia es el marco de plata." },
-            { t: "Tráfico Pesado", d: "Alguien te cierra el paso bruscamente con su auto.", a: "No toques la bocina con ira. Respira. Tu seguridad y tranquilidad valen más que un reclamo en la calle." },
-            { t: "Persona Necesitada", d: "Alguien te pide ayuda en la calle y tienes prisa.", a: "Si no puedes dar dinero, da una palabra amable o una sonrisa. El respeto es el oro que todos merecen." },
-            { t: "Ruido del Vecino", d: "Tu vecino tiene la música muy alta y es tarde.", a: "No llames a la policía de inmediato. Habla con él primero al día siguiente con calma. La buena vecindad es un tesoro." },
-
-            // CONSEJOS GENERALES
-            { t: "Duda de Hablar", d: "Tienes un chisme muy jugoso pero que podría afectar a alguien.", a: "Pásalo por el filtro: ¿Es verdad? ¿Es necesario? ¿Es amable? Si falta uno, la palabra de oro es el silencio." },
-            { t: "Promesa Pendiente", d: "Prometiste algo que ahora te da mucha pereza o dificultad cumplir.", a: "Hazlo. Tu palabra es tu marca de oro. Cumplir lo que dices te da un valor incalculable." },
-            { t: "Momento de Ira", d: "Sientes que vas a explotar y decir cosas de las que te vas a arrepentir.", a: "Aléjate. El silencio momentáneo es la plata que salva tu integridad de oro. Habla cuando estés frío." },
-            { t: "Verdad Incomoda", d: "Alguien tiene algo en los dientes o la ropa desarreglada.", a: "Díselo rápido y en voz baja. La plata es la discreción; el oro es evitarle la vergüenza." },
-            { t: "Pedir Perdón", d: "Sabes que te equivocaste pero tu orgullo no te deja hablar.", a: "La palabra 'perdón' es la manzana de oro más difícil de dar, pero la que más brilla. Hazlo hoy mismo." },
-            
-            // ESCENARIOS ADICIONALES
-            { t: "Regalo no Gustado", d: "Recibes un regalo que realmente no te gusta o no necesitas.", a: "Agradece el gesto, no el objeto. El oro es el amor de quien te lo dio; la plata es tu gratitud sincera." },
-            { t: "Amigo con Mal Aliento", d: "Estás hablando con alguien y notas que tiene mal aliento.", a: "Ofrécele un chicle o menta primero para ti y luego a él. La sutileza es el marco de plata de la cortesía." },
-            { t: "Compañero con Olor", d: "Un colega tiene un problema de higiene personal constante.", a: "Habla a solas y con extrema delicadeza. Usa el 'nosotros' para que no se sienta atacado. La dignidad es el oro." },
-            { t: "Llorar en Público", d: "Ves a un extraño llorando en un banco del parque.", a: "Ofrécele un pañuelo o pregunta si está bien. A veces el oro es simplemente saber que no somos invisibles." },
-            { t: "Opinión de Experto", d: "Alguien te da una opinión técnica sobre algo que tú conoces mejor.", a: "No lo humilles corrigiéndolo. Escucha y luego aporta lo tuyo como una 'curiosidad' extra. La humildad es oro." },
-            { t: "Interrupción Constante", d: "Alguien no te deja terminar tus frases al hablar.", a: "No te desesperes. Espera a que termine y di: 'Me gustaría terminar la idea anterior'. La firmeza con suavidad es plata." },
-            { t: "Día de Lluvia", d: "Alguien se moja porque no tiene paraguas y tú tienes uno grande.", a: "Comparte el espacio. El oro es la solidaridad; la plata es tu disposición a incomodarte un poco por otro." },
-            { t: "Broma Pesada", d: "Alguien hace una broma sobre ti que te hace sentir mal.", a: "No rías por compromiso. Di con calma: 'Eso me dolió'. La honestidad sobre tus sentimientos es oro puro." },
-            { t: "Lugar de Estacionamiento", d: "Alguien te gana el lugar que estabas esperando por segundos.", a: "Déjalo ir. Tu paz por el resto del día vale más que unos metros de caminata. El autocontrol es tu joya." },
-            { t: "Falta de Propina", d: "Tus amigos no quieren dejar propina a pesar del excelente servicio.", a: "Ponla tú sin hacer un escándalo. El ejemplo silencioso es una palabra de oro muy potente." },
-            { t: "Ropa Inadecuada", d: "Ves a un amigo que va a una entrevista de trabajo vestido de forma muy informal.", a: "Díselo con amor: 'Esa ropa es genial, pero para este puesto quizás esta otra te haga brillar más'. El apoyo es oro." },
-            { t: "Llamada Equivocada", d: "Alguien te llama por error varias veces seguidas.", a: "No contestes con gritos. Explica con calma que se ha equivocado. La paciencia con extraños es una virtud de plata." },
-            { t: "Cine y Ruido", d: "Alguien habla fuerte durante la película.", a: "Un 'shhh' suave es suficiente. No empieces una pelea en la oscuridad. El respeto al espacio común es oro." },
-            { t: "Niño Llorando", d: "En un avión o bus, un bebé no para de llorar cerca de ti.", a: "No mires mal a los padres; ellos están más estresados que tú. Una mirada de comprensión es el oro que necesitan." },
-            { t: "Gimnasio y Equipo", d: "Alguien se queda sentado en la máquina que necesitas usando el celular.", a: "Pregunta amablemente si pueden turnarse. La comunicación clara evita el resentimiento." },
-            { t: "Error de Precio", d: "El cajero te da cambio de más por error.", a: "Devuélvelo. La integridad es el oro que no se compra con dinero. Tu honestidad es tu mayor tesoro." },
-            { t: "Ascensor Lleno", d: "Ves que alguien corre para alcanzar el ascensor y ya está casi lleno.", a: "Haz un espacio o detén la puerta. La cortesía en las pequeñas cosas es el marco de plata de la vida." },
-            { t: "Amigo con Comida", d: "Un amigo tiene una mancha de salsa en la camisa antes de una cita.", a: "Avísale de inmediato pero en privado. La lealtad se demuestra en los detalles que salvan al otro." },
-            { t: "Música en Público", d: "Alguien escucha música sin audífonos en el transporte público.", a: "Si te molesta mucho, pide amablemente si puede bajar el volumen, o mejor aún, usa tus propios audífonos. El control sobre tu reacción es oro." },
-            { t: "Cumpleaños Olvidado", d: "Te das cuenta de que fue el cumpleaños de un gran amigo ayer.", a: "No pongas excusas. Llama, admite el error y felicítalo con más cariño hoy. La sinceridad es la plata que limpia el descuido." },
-            { t: "Invitación Rechazada", d: "Tienes que decir que no a un evento que te hace ilusión pero no tienes dinero.", a: "Di la verdad con sencillez: 'Me encantaría, pero este mes mi presupuesto no me lo permite'. La autenticidad es oro." }
+            { t: "Cansancio Extremo", d: "Tu pareja llega a casa y se queja de todo apenas entra por la puerta.", a: "Escucha sin dar soluciones inmediatas. La empatía es el marco de plata; el oro es esperar a que descanse antes de hablar." },
+            { t: "Plato Roto", d: "Un familiar rompe algo valioso por accidente.", a: "Pregunta si está bien antes de evaluar el daño. La relación es el tesoro real; el objeto es solo material." },
+            { t: "Secreto Confiado", d: "Te cuentan algo muy personal y mueres por compartirlo.", a: "La lealtad es oro puro. El silencio es el cofre de plata que protege tu integridad y tus amistades." },
+            { t: "Éxito Ajeno", d: "Un amigo logra algo que tú deseabas mucho.", a: "Celébralo como si fuera tuyo. La envidia es plomo; la alegría genuina por el otro es oro de 24 quilates." },
+            { t: "Crítica Injusta", d: "Alguien te critica duramente por algo que no hiciste.", a: "No te defiendas con ira. Una respuesta mansa es el marco de plata que desarma al atacante y muestra tu altura." }
         ];
 
         let consejoActual = "";
@@ -186,17 +201,15 @@
             const btnReveal = document.getElementById('btn-reveal');
             const icon = document.getElementById('icon-display');
 
-            // Efecto visual de carga
+            icon.style.transform = 'scale(1.4) rotate(15deg)';
+            setTimeout(() => icon.style.transform = 'scale(1) rotate(0deg)', 400);
+
             container.classList.remove('fade-in');
-            void container.offsetWidth; // Forzar reflow
+            void container.offsetWidth; 
             container.classList.add('fade-in');
+            
             advice.classList.add('hidden');
             
-            // Animación del icono
-            icon.style.transform = 'rotate(360deg) scale(1.2)';
-            setTimeout(() => icon.style.transform = 'rotate(0deg) scale(1)', 400);
-
-            // Algoritmo de selección aleatoria sin repetición inmediata
             let indexAleatorio;
             do {
                 indexAleatorio = Math.floor(Math.random() * situaciones.length);
@@ -216,7 +229,12 @@
             const advice = document.getElementById('advice-result');
             const btnReveal = document.getElementById('btn-reveal');
             
-            advice.innerHTML = `<span class="text-yellow-500 font-bold block mb-1">REFLEXIÓN DE ORO:</span> ${consejoActual}`;
+            advice.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 text-[#d4af37] font-bold">✦</div>
+                    <p class="font-semibold leading-relaxed">${consejoActual}</p>
+                </div>
+            `;
             advice.classList.remove('hidden');
             btnReveal.classList.add('hidden');
         }
