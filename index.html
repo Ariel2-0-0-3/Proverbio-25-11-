@@ -7,11 +7,12 @@
     <title>Manzanas de Oro - Tribu Encendida</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            background: #0f172a;
+            background-image: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
             color: #e2e2e2;
             min-height: 100vh;
             display: flex;
@@ -21,131 +22,109 @@
             padding: 20px;
         }
 
-        /* Contenedor del logo para evitar recortes */
-        .logo-container {
+        /* Contenedor del Logo Superior */
+        .header-logo-container {
             width: 100%;
-            max-width: 220px;
+            max-width: 320px;
             margin: 0 auto 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-align: center;
         }
 
-        .logo-main {
+        .header-logo {
             width: 100%;
             height: auto;
-            max-height: 120px;
-            object-fit: contain; /* Esto evita que se corte la imagen */
-            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
-            transition: transform 0.4s ease;
-        }
-        
-        .logo-main:hover {
-            transform: scale(1.05);
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
         }
 
         .gold-title {
             color: #d4af37;
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             text-align: center;
             margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -0.02em;
         }
 
-        /* Tarjeta con efecto de cristal (Glassmorphism) */
-        .card {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        /* Tarjeta con efecto de cristal profundo (Glassmorphism) */
+        .main-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 3.5rem;
-            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.7);
-            padding: 3.5rem 2rem;
+            border-radius: 3rem;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.8);
+            padding: 3rem 2rem;
             width: 100%;
-            max-width: 450px;
+            max-width: 440px;
             position: relative;
-            z-index: 10;
+            text-align: center;
         }
 
-        /* Marca de agua interna */
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            height: 70%;
-            background-image: url('https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Botón Azul vibrante */
-        .apple-btn {
+        /* Botón Azul Vibrante solicitado */
+        .btn-generate {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
             padding: 1.25rem;
-            border-radius: 1.25rem;
+            border-radius: 1.2rem;
             width: 100%;
+            margin-top: 2rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.5);
+            border: none;
             cursor: pointer;
+            font-size: 0.85rem;
         }
 
-        .apple-btn:hover {
+        .btn-generate:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 35px -8px rgba(37, 99, 235, 0.5);
+            box-shadow: 0 20px 40px -8px rgba(37, 99, 235, 0.6);
             background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
-        /* Contenedor de la reflexión */
-        .gold-reflection {
-            background: rgba(212, 175, 55, 0.1);
+        /* Estilo de la Reflexión Dorada */
+        .gold-box {
+            background: rgba(212, 175, 55, 0.08);
             border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 1.5rem;
-            border-radius: 1.75rem;
+            border-radius: 1.5rem;
             margin-top: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeIn 0.6s ease-out forwards;
+            text-align: left;
+            animation: slideUp 0.5s ease-out;
         }
 
-        .gold-reflection p {
+        .gold-box p {
             color: #d4af37;
             font-weight: 600;
             line-height: 1.6;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            font-size: 1.05rem;
         }
 
         .status-badge {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            padding: 0.35rem 1.25rem;
-            border-radius: 9999px;
+            color: #64748b;
+            padding: 0.4rem 1.2rem;
+            border-radius: 999px;
             font-size: 0.7rem;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 800;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .scenario-text {
-            color: #cbd5e1;
-            font-size: 1.15rem;
-            line-height: 1.6;
+        .scenario-desc {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -153,40 +132,37 @@
 
     <div class="flex flex-col items-center w-full max-w-lg">
         <header class="mb-10 text-center w-full">
-            <div class="logo-container">
+            <div class="header-logo-container">
                 <img src="https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png" 
                      alt="Tribu Encendida Logo" 
-                     class="logo-main"
-                     onerror="this.src='https://img.icons8.com/ios-filled/150/ffffff/fire-alt.png'; this.style.opacity='0.5';">
+                     class="header-logo">
             </div>
             <h1 class="gold-title">Manzanas de Oro</h1>
             <span class="status-badge">Proverbio 25:11</span>
         </header>
 
-        <main class="card text-center">
-            <div class="watermark"></div>
-            
-            <div id="icon-display" class="text-7xl mb-8 transition-all duration-500">🍎</div>
+        <main class="main-card">
+            <div id="icon-display" class="text-7xl mb-6">🍎</div>
 
             <div id="content-area">
-                <h2 id="scenario-title" class="text-2xl font-bold text-white mb-4 tracking-tight">¿Qué harías tú?</h2>
-                <p id="scenario-desc" class="scenario-text mb-10">
-                    Pulsa el botón azul para ver una situación y su manzana de oro.
+                <h2 id="scenario-title" class="text-2xl font-bold text-white mb-4">¿Qué harías tú?</h2>
+                <p id="scenario-desc" class="scenario-desc">
+                    Pulsa el botón azul para generar una situación de sabiduría.
                 </p>
 
-                <div id="advice-result" class="hidden gold-reflection text-left">
-                    <!-- El consejo aparecerá aquí en dorado -->
+                <div id="advice-result" class="hidden gold-box">
+                    <!-- Contenido dinámico -->
                 </div>
             </div>
 
-            <button onclick="nuevaSituacion()" class="apple-btn">
+            <button onclick="generar()" class="btn-generate">
                 Generar Situación
             </button>
         </main>
 
-        <footer class="mt-12 text-center opacity-50">
-            <p class="text-[10px] tracking-[0.4em] uppercase font-black text-slate-400">Tribu Encendida &copy; 2026</p>
-            <p class="text-[8px] tracking-[0.6em] uppercase mt-1 font-bold text-slate-500">"Una Tribu, un Fuego"</p>
+        <footer class="mt-12 text-center opacity-40">
+            <p class="text-[10px] tracking-[0.4em] uppercase font-black">Tribu Encendida &copy; 2026</p>
+            <p class="text-[8px] tracking-[0.6em] uppercase mt-1">"Una Tribu, un Fuego"</p>
         </footer>
     </div>
 
@@ -196,21 +172,19 @@
             { t: "Junta Tensa", d: "Todos están discutiendo por un problema y nadie llega a una solución.", a: "No grites más. La palabra oportuna es la que calma: propón una pausa o una pregunta que invite a pensar, no a pelear." },
             { t: "Cansancio Extremo", d: "Tu pareja llega a casa y se queja de todo apenas entra por la puerta.", a: "Escucha sin dar soluciones inmediatas. La empatía es el marco de plata; el oro es esperar a que descanse antes de hablar." },
             { t: "Plato Roto", d: "Un familiar rompe algo valioso por accidente.", a: "Pregunta si está bien antes de evaluar el daño. La relación es el tesoro real; el objeto es solo material." },
-            { t: "Secreto Confiado", d: "Te cuentan algo muy personal y mueres por compartirlo.", a: "La lealtad es oro puro. El silencio es el cofre de plata que protege tu integridad y tus amistades." },
-            { t: "Éxito Ajeno", d: "Un amigo logra algo que tú deseabas mucho.", a: "Celébralo como si fuera tuyo. La envidia es plomo; la alegría genuina por el otro es oro de 24 quilates." }
+            { t: "Secreto Confiado", d: "Te cuentan algo muy personal y mueres por compartirlo.", a: "La lealtad es oro puro. El silencio es el cofre de plata que protege tu integridad y tus amistades." }
         ];
 
         let ultima = -1;
 
-        function nuevaSituacion() {
+        function generar() {
             const adviceDiv = document.getElementById('advice-result');
             const title = document.getElementById('scenario-title');
             const desc = document.getElementById('scenario-desc');
             const icon = document.getElementById('icon-display');
 
-            // Animación del icono
-            icon.style.transform = 'scale(1.3) rotate(10deg)';
-            setTimeout(() => icon.style.transform = 'scale(1) rotate(0deg)', 400);
+            icon.style.transform = 'scale(1.2)';
+            setTimeout(() => icon.style.transform = 'scale(1)', 200);
 
             let index;
             do {
@@ -219,11 +193,9 @@
             ultima = index;
 
             const item = situaciones[index];
-            
             title.innerText = item.t;
             desc.innerText = item.d;
             
-            // Mostrar reflexión en dorado
             adviceDiv.innerHTML = `
                 <div class="flex gap-3">
                     <span class="text-[#d4af37] text-lg">✦</span>
