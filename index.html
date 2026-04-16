@@ -17,15 +17,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            margin: 0;
+            padding: 20px;
         }
 
-        /* Logo de cabecera */
-        .logo-main {
-            width: 210px;
+        /* Contenedor del logo para evitar recortes */
+        .logo-container {
+            width: 100%;
+            max-width: 220px;
             margin: 0 auto 1.5rem;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
-            transition: transform 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-main {
+            width: 100%;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain; /* Esto evita que se corte la imagen */
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+            transition: transform 0.4s ease;
         }
         
         .logo-main:hover {
@@ -35,147 +47,146 @@
         .gold-title {
             color: #d4af37;
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            line-height: 1;
-            margin-bottom: 0.75rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
+        /* Tarjeta con efecto de cristal (Glassmorphism) */
         .card {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 3.5rem;
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.7);
+            padding: 3.5rem 2rem;
+            width: 100%;
+            max-width: 450px;
             position: relative;
-            overflow: hidden;
             z-index: 10;
         }
 
-        /* Marca de Agua con el Logo de la Tribu */
+        /* Marca de agua interna */
         .watermark {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
-            height: 90%;
+            width: 70%;
+            height: 70%;
             background-image: url('https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.04;
+            opacity: 0.03;
             pointer-events: none;
             z-index: -1;
         }
 
-        /* Botón Generar Situación en Azul Diferente */
+        /* Botón Azul vibrante */
         .apple-btn {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: #ffffff;
-            font-weight: 800;
+            color: white;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
+            padding: 1.25rem;
+            border-radius: 1.25rem;
+            width: 100%;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
         }
 
         .apple-btn:hover {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 20px 35px -8px rgba(37, 99, 235, 0.5);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
-        .reveal-btn {
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.05);
+        /* Contenedor de la reflexión */
+        .gold-reflection {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1.5rem;
+            border-radius: 1.75rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .gold-reflection p {
+            color: #d4af37;
             font-weight: 600;
-            backdrop-filter: blur(5px);
-        }
-
-        .reveal-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #ffffff;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         .status-badge {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #94a3b8;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding: 0.35rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #icon-display {
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-        }
-
-        /* Estilo Dorado para la Reflexión */
-        .gold-reflection {
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: #d4af37;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+        .scenario-text {
+            color: #cbd5e1;
+            font-size: 1.15rem;
+            line-height: 1.6;
         }
     </style>
 </head>
-<body class="p-4">
+<body>
 
-    <div class="w-full max-w-lg">
-        <header class="text-center mb-10 fade-in">
-            <!-- Logo Oficial -->
-            <img src="https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png" 
-                 alt="Tribu Encendida Logo" 
-                 class="logo-main"
-                 onerror="this.src='https://img.icons8.com/ios-filled/150/ffffff/fire-alt.png'; this.style.opacity='0.3';">
-            
-            <h1 class="gold-title">Manzanas de Oro</h1>
-            <div class="inline-block px-4 py-1 rounded-full status-badge text-[9px] tracking-[0.3em] font-bold uppercase">
-                Proverbio 25:11
+    <div class="flex flex-col items-center w-full max-w-lg">
+        <header class="mb-10 text-center w-full">
+            <div class="logo-container">
+                <img src="https://raw.githubusercontent.com/Ariel2-0-0-3/Proverbio-25-11/main/logo.png" 
+                     alt="Tribu Encendida Logo" 
+                     class="logo-main"
+                     onerror="this.src='https://img.icons8.com/ios-filled/150/ffffff/fire-alt.png'; this.style.opacity='0.5';">
             </div>
+            <h1 class="gold-title">Manzanas de Oro</h1>
+            <span class="status-badge">Proverbio 25:11</span>
         </header>
 
-        <main class="card rounded-[3rem] p-10 md:p-14 text-center">
-            <!-- Marca de agua interna -->
+        <main class="card text-center">
             <div class="watermark"></div>
+            
+            <div id="icon-display" class="text-7xl mb-8 transition-all duration-500">🍎</div>
 
-            <div id="icon-display" class="text-7xl mb-10 transition-transform duration-700 select-none">🍎</div>
-
-            <div id="content-box" class="min-h-[240px] flex flex-col justify-center relative">
-                <h2 id="scenario-title" class="text-2xl font-bold mb-4 text-white tracking-tight">¿Qué harías tú?</h2>
-                <p id="scenario-desc" class="text-slate-400 mb-10 leading-relaxed text-lg">
-                    Haz clic en el botón azul para lanzar una nueva situación de sabiduría.
+            <div id="content-area">
+                <h2 id="scenario-title" class="text-2xl font-bold text-white mb-4 tracking-tight">¿Qué harías tú?</h2>
+                <p id="scenario-desc" class="scenario-text mb-10">
+                    Pulsa el botón azul para ver una situación y su manzana de oro.
                 </p>
-                
-                <button id="btn-reveal" onclick="revelarConsejo()" class="hidden reveal-btn py-3 px-8 rounded-2xl mx-auto mb-8 transition-all">
-                    Ver Reflexión
-                </button>
 
-                <!-- El contenedor de la reflexión se mantiene dorado -->
-                <div id="advice-result" class="hidden p-6 gold-reflection rounded-3xl text-left mb-10 fade-in">
-                    <!-- Contenido dinámico -->
+                <div id="advice-result" class="hidden gold-reflection text-left">
+                    <!-- El consejo aparecerá aquí en dorado -->
                 </div>
             </div>
 
-            <button onclick="nuevaCapsula()" class="apple-btn w-full py-5 rounded-2xl shadow-xl text-sm font-black">
+            <button onclick="nuevaSituacion()" class="apple-btn">
                 Generar Situación
             </button>
         </main>
 
-        <footer class="mt-12 text-center flex flex-col gap-2">
-            <p class="text-[10px] tracking-[0.4em] text-slate-400 uppercase font-bold">
-                Tribu Encendida &copy; 2026
-            </p>
-            <p class="text-[8px] tracking-[0.6em] text-slate-600 uppercase font-medium">
-                "Una Tribu, un Fuego"
-            </p>
+        <footer class="mt-12 text-center opacity-50">
+            <p class="text-[10px] tracking-[0.4em] uppercase font-black text-slate-400">Tribu Encendida &copy; 2026</p>
+            <p class="text-[8px] tracking-[0.6em] uppercase mt-1 font-bold text-slate-500">"Una Tribu, un Fuego"</p>
         </footer>
     </div>
 
@@ -186,57 +197,40 @@
             { t: "Cansancio Extremo", d: "Tu pareja llega a casa y se queja de todo apenas entra por la puerta.", a: "Escucha sin dar soluciones inmediatas. La empatía es el marco de plata; el oro es esperar a que descanse antes de hablar." },
             { t: "Plato Roto", d: "Un familiar rompe algo valioso por accidente.", a: "Pregunta si está bien antes de evaluar el daño. La relación es el tesoro real; el objeto es solo material." },
             { t: "Secreto Confiado", d: "Te cuentan algo muy personal y mueres por compartirlo.", a: "La lealtad es oro puro. El silencio es el cofre de plata que protege tu integridad y tus amistades." },
-            { t: "Éxito Ajeno", d: "Un amigo logra algo que tú deseabas mucho.", a: "Celébralo como si fuera tuyo. La envidia es plomo; la alegría genuina por el otro es oro de 24 quilates." },
-            { t: "Crítica Injusta", d: "Alguien te critica duramente por algo que no hiciste.", a: "No te defiendas con ira. Una respuesta mansa es el marco de plata que desarma al atacante y muestra tu altura." }
+            { t: "Éxito Ajeno", d: "Un amigo logra algo que tú deseabas mucho.", a: "Celébralo como si fuera tuyo. La envidia es plomo; la alegría genuina por el otro es oro de 24 quilates." }
         ];
 
-        let consejoActual = "";
-        let ultimaSituacion = -1;
+        let ultima = -1;
 
-        function nuevaCapsula() {
-            const container = document.getElementById('content-box');
-            const titulo = document.getElementById('scenario-title');
+        function nuevaSituacion() {
+            const adviceDiv = document.getElementById('advice-result');
+            const title = document.getElementById('scenario-title');
             const desc = document.getElementById('scenario-desc');
-            const advice = document.getElementById('advice-result');
-            const btnReveal = document.getElementById('btn-reveal');
             const icon = document.getElementById('icon-display');
 
-            icon.style.transform = 'scale(1.4) rotate(15deg)';
+            // Animación del icono
+            icon.style.transform = 'scale(1.3) rotate(10deg)';
             setTimeout(() => icon.style.transform = 'scale(1) rotate(0deg)', 400);
 
-            container.classList.remove('fade-in');
-            void container.offsetWidth; 
-            container.classList.add('fade-in');
-            
-            advice.classList.add('hidden');
-            
-            let indexAleatorio;
+            let index;
             do {
-                indexAleatorio = Math.floor(Math.random() * situaciones.length);
-            } while (indexAleatorio === ultimaSituacion);
-            
-            ultimaSituacion = indexAleatorio;
-            const item = situaciones[indexAleatorio];
+                index = Math.floor(Math.random() * situaciones.length);
+            } while (index === ultima);
+            ultima = index;
 
-            titulo.innerText = item.t;
+            const item = situaciones[index];
+            
+            title.innerText = item.t;
             desc.innerText = item.d;
-            consejoActual = item.a;
             
-            btnReveal.classList.remove('hidden');
-        }
-
-        function revelarConsejo() {
-            const advice = document.getElementById('advice-result');
-            const btnReveal = document.getElementById('btn-reveal');
-            
-            advice.innerHTML = `
-                <div class="flex items-start gap-3">
-                    <div class="mt-1 text-[#d4af37] font-bold">✦</div>
-                    <p class="font-semibold leading-relaxed">${consejoActual}</p>
+            // Mostrar reflexión en dorado
+            adviceDiv.innerHTML = `
+                <div class="flex gap-3">
+                    <span class="text-[#d4af37] text-lg">✦</span>
+                    <p>${item.a}</p>
                 </div>
             `;
-            advice.classList.remove('hidden');
-            btnReveal.classList.add('hidden');
+            adviceDiv.classList.remove('hidden');
         }
     </script>
 </body>
